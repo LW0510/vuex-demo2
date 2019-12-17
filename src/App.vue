@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <button @click="increment">增加</button>
+    <button>减少</button>
+    <button @click="incrementAsync">异步增加</button>
+    <p>当前数字为：{{count}}</p>
+
+    <!-- <router-view/> -->
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import {mapGetters,mapActions} from 'vuex'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'App',
+  data(){
+    return {
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
     }
-  }
+  },
+  // 方式一:通过this.$store访问
+  // computed:{
+  //   count:function(){
+  //     return this.$store.state.count;
+  //   }
+  // },
+  computed:mapGetters([
+    'count'
+  ]),
+  methods:mapActions([
+    'increment',
+    'incrementAsync'
+  ])
 }
+</script>
+
+<style>
+
 </style>
